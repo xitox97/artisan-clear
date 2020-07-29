@@ -3,36 +3,39 @@
 namespace Spatie\Skeleton\Tests;
 
 use Orchestra\Testbench\TestCase as Orchestra;
-use Spatie\Skeleton\SkeletonServiceProvider;
+use Xitox\ArtisanClearServiceProvider;
+use Illuminate\Support\Facades\Artisan;
 
 class TestCase extends Orchestra
 {
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        $this->withFactories(__DIR__.'/database/factories');
-    }
-
     protected function getPackageProviders($app)
     {
         return [
-            SkeletonServiceProvider::class,
+            ArtisanClearServiceProvider::class,
         ];
     }
 
-    public function getEnvironmentSetUp($app)
+    /** @test */
+    public function display_output_text()
     {
-        $app['config']->set('database.default', 'sqlite');
-        $app['config']->set('database.connections.sqlite', [
-            'driver' => 'sqlite',
-            'database' => ':memory:',
-            'prefix' => '',
-        ]);
+        $this->artisan('log:clear')
+        ->expectsOutput('Application log cleared!')
+        ->assertExitCode(0);
+    }
 
-        /*
-        include_once __DIR__.'/../database/migrations/create_skeleton_table.php.stub';
-        (new \CreatePackageTable())->up();
-        */
+    /** @test */
+    public function clear_laravel_log_files()
+    {
+        file_put_contents(storage_path('logs/laravel.log'), "test");
+
+        $this->assertTrue(
+            !empty(file_get_contents(storage_path('/logs/laravel.log')))
+        );
+
+        Artisan::call('log:clear');
+
+        $this->assertTrue(
+            empty(file_get_contents(storage_path('/logs/laravel.log')))
+        );
     }
 }
