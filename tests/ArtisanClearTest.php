@@ -1,12 +1,12 @@
 <?php
 
-namespace Spatie\Skeleton\Tests;
+namespace Tests;
 
 use Orchestra\Testbench\TestCase as Orchestra;
 use Xitox\ArtisanClearServiceProvider;
 use Illuminate\Support\Facades\Artisan;
 
-class TestCase extends Orchestra
+class ArtisanClearTest extends Orchestra
 {
     protected function getPackageProviders($app)
     {
@@ -16,7 +16,7 @@ class TestCase extends Orchestra
     }
 
     /** @test */
-    public function display_output_text()
+    public function it_display_output_text()
     {
         $this->artisan('log:clear')
         ->expectsOutput('Application log cleared!')
@@ -24,7 +24,7 @@ class TestCase extends Orchestra
     }
 
     /** @test */
-    public function clear_laravel_log_files()
+    public function it_clear_laravel_log_files()
     {
         file_put_contents(storage_path('logs/laravel.log'), "test");
 
