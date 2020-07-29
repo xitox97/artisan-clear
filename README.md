@@ -1,3 +1,5 @@
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/xitox97/artisan-clear.svg?style=flat-square)](https://packagist.org/packages/xitox97/artisan-clear)
+[![Total Downloads](https://img.shields.io/packagist/dt/xitox97/artisan-clear.svg?style=flat-square)](https://packagist.org/packages/xitox97/artisan-clear)
 # Laravel Log Clear Artisan Command
 
 This package extend laravel artisan command by adding new command to easily clear log files on demand.
