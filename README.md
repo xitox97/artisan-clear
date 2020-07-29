@@ -9,9 +9,9 @@ This package extend laravel artisan command by adding new command to easily clea
 You can install the package via composer:
 
 ```bash
-composer require xitox97/artisan-clear
+composer require xitox97/artisan-clear --dev
 ```
-
+*Remove --dev if want to uses it in production*
 ## Usage
 
 ``` bash
